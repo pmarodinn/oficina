@@ -50,8 +50,10 @@ header nav ul.menu li a:hover {
 }
 
 .hero h1 {
-    font-size: 2.5rem;
+    font-size: 3rem; /* Aumentado o tamanho da fonte para destacar */
     margin-bottom: 10px;
+    text-transform: uppercase; /* Deixar o título em maiúsculas */
+    letter-spacing: 2px; /* Espaçamento entre letras para um visual mais impactante */
 }
 
 .hero p {
@@ -75,6 +77,15 @@ header nav ul.menu li a:hover {
 .section p {
     font-size: 1rem;
     color: #555;
+}
+
+/* Estilo específico para o cronograma */
+.cronograma-image {
+    max-width: 100%; /* Garante que a imagem seja responsiva */
+    height: auto;
+    border-radius: 8px; /* Borda arredondada para um visual mais moderno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar a imagem */
+    margin-top: 20px; /* Espaçamento acima da imagem */
 }
 
 /* Posts do blog */
