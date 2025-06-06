@@ -23,11 +23,8 @@ header {
 header nav ul.menu {
     list-style: none;
     display: flex;
-    justify-content: space-between;
-}
-
-header nav ul.menu li {
-    margin: 0 10px;
+    justify-content: center;
+    gap: 2rem;
 }
 
 header nav ul.menu li a {
@@ -43,49 +40,79 @@ header nav ul.menu li a:hover {
 
 /* Seção Hero */
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('imagens/hero-bg.jpg') center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-bg.jpg') center/cover no-repeat;
     color: #fff;
     text-align: center;
-    padding: 100px 20px;
+    padding: 80px 20px;
 }
 
 .hero h1 {
-    font-size: 3rem; /* Aumentado o tamanho da fonte para destacar */
+    font-size: 3rem;
     margin-bottom: 10px;
-    text-transform: uppercase; /* Deixar o título em maiúsculas */
-    letter-spacing: 2px; /* Espaçamento entre letras para um visual mais impactante */
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .hero p {
     font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* Seções principais */
 .section {
     padding: 60px 20px;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    text-align: center;
+    text-align: left;
 }
 
 .section h2 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #2c3e50;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 10px;
 }
 
 .section p {
     font-size: 1rem;
     color: #555;
+    margin-bottom: 1rem;
 }
 
-/* Estilo específico para o cronograma */
+.section ul {
+    margin-left: 20px;
+    margin-bottom: 1rem;
+}
+
+.section li {
+    margin-bottom: 0.5rem;
+}
+
+/* Cronograma */
 .cronograma-image {
-    max-width: 100%; /* Garante que a imagem seja responsiva */
+    max-width: 100%;
     height: auto;
-    border-radius: 8px; /* Borda arredondada para um visual mais moderno */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar a imagem */
-    margin-top: 20px; /* Espaçamento acima da imagem */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+/* Proposta - link */
+.proposal-link {
+    display: inline-block;
+    margin-top: 1rem;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.proposal-link:hover {
+    background-color: #0056b3;
 }
 
 /* Posts do blog */
@@ -100,7 +127,6 @@ header nav ul.menu li a:hover {
     margin-bottom: 20px;
     padding: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: left;
 }
 
 .post h2 {
@@ -112,13 +138,35 @@ header nav ul.menu li a:hover {
 .post p {
     font-size: 1rem;
     color: #555;
+    margin-bottom: 10px;
 }
 
-.post img {
-    max-width: 100%;
+/* Galeria de imagens */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.image-gallery img {
+    width: calc(33% - 0.666rem);
     height: auto;
+    object-fit: cover;
     border-radius: 8px;
-    margin-top: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .image-gallery img {
+        width: calc(50% - 0.666rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .image-gallery img {
+        width: 100%;
+    }
 }
 
 /* Rodapé */
@@ -126,7 +174,7 @@ footer {
     background-color: #2c3e50;
     color: #fff;
     text-align: center;
-    padding: 15px 0;
+    padding: 20px 10px;
     margin-top: 40px;
 }
 
@@ -136,13 +184,8 @@ footer p {
 
 /* Responsividade */
 @media (max-width: 768px) {
-    header nav ul.menu {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    header nav ul.menu li {
-        margin: 5px 0;
+    .section {
+        padding: 40px 20px;
     }
 
     .hero h1 {
@@ -151,5 +194,15 @@ footer p {
 
     .hero p {
         font-size: 1rem;
+    }
+
+    header nav ul.menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .post {
+        padding: 15px;
     }
 }
