@@ -32,6 +32,67 @@ function initHeaderScroll() {
     });
 }
 
+// Menu hambúrguer para mobile
+function initMobileMenu() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const menu = document.querySelector('.menu');
+    const menuLinks = document.querySelectorAll('.menu a');
+    
+    if (!menuToggle) {
+        // Criar botão hambúrguer se não existir
+        const toggle = document.createElement('button');
+        toggle.className = 'menu-toggle';
+        toggle.innerHTML = '<span></span><span></span><span></span>';
+        toggle.setAttribute('aria-label', 'Abrir menu');
+        
+        const nav = document.querySelector('header nav');
+        nav.insertBefore(toggle, menu);
+        
+        // Atualizar referência
+        menuToggle = toggle;
+    }
+    
+    // Toggle do menu
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        menu.classList.toggle('active');
+        
+        // Atualizar aria-label
+        const isOpen = menu.classList.contains('active');
+        menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        
+        // Prevenir scroll do body quando menu estiver aberto
+        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    });
+    
+    // Fechar menu ao clicar em um link
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+    
+    // Fechar menu ao clicar fora dele
+    document.addEventListener('click', (e) => {
+        if (!menuToggle.contains(e.target) && !menu.contains(e.target)) {
+            menuToggle.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Fechar menu com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('active')) {
+            menuToggle.classList.remove('active');
+            menu.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+}
+
 // Botão voltar ao topo
 function initBackToTop() {
     const backToTopBtn = document.querySelector('.back-to-top');
@@ -62,9 +123,13 @@ function initSmoothScroll() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                // Calcular offset do header fixo
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
@@ -77,6 +142,8 @@ function initImageModal() {
     const modalImage = document.getElementById('modalImage');
     const modalCaption = document.querySelector('.modal-caption');
     const closeBtn = document.querySelector('.modal-close');
+    
+    if (!modal) return;
     
     // Selecionar todas as imagens que devem ser expandidas
     const clickableImages = document.querySelectorAll('.cronograma-image, .image-gallery img, .team-member img');
@@ -101,7 +168,9 @@ function initImageModal() {
         }, 300);
     };
     
-    closeBtn.addEventListener('click', closeModal);
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
     
     modal.addEventListener('click', (e) => {
         if (e.target === modal) {
@@ -117,74 +186,166 @@ function initImageModal() {
     });
 }
 
-// Efeito de typing no hero
-function initTypingEffect() {
-    const heroTitle = document.querySelector('.hero h1');
-    if (heroTitle) {
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.style.borderRight = '2px solid white';
-        
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            } else {
-                setTimeout(() => {
-                    heroTitle.style.borderRight = 'none';
-                }, 1000);
-            }
-        };
-        
-        setTimeout(typeWriter, 1000);
+// Detecção de dispositivo touch
+function initTouchDetection() {
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        document.body.classList.add('touch-device');
     }
 }
 
-// Parallax effect simples
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+// Otimização de performance para scroll
+function initScrollOptimization() {
+    let ticking = false;
+    
+    function updateScrollEffects() {
+        // Aqui você pode adicionar efeitos de scroll otimizados
+        ticking = false;
+    }
+    
+    function requestScrollUpdate() {
+        if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
         }
+    }
+    
+    window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+}
+
+// Lazy loading para imagens (se necessário)
+function initLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+}
+
+// Ajuste de viewport height para mobile
+function initViewportFix() {
+    function setVH() {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+    
+    setVH();
+    window.addEventListener('resize', setVH);
+    window.addEventListener('orientationchange', () => {
+        setTimeout(setVH, 100);
     });
 }
 
-// Contador animado para estatísticas (se houver)
-function animateCounters() {
-    const counters = document.querySelectorAll('.counter');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const increment = target / 100;
-        let current = 0;
-        
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                counter.textContent = Math.ceil(current);
-                setTimeout(updateCounter, 20);
-            } else {
-                counter.textContent = target;
+// Prevenção de zoom em inputs no iOS
+function initIOSInputFix() {
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            if (parseFloat(getComputedStyle(input).fontSize) < 16) {
+                input.style.fontSize = '16px';
             }
-        };
+        });
+    }
+}
+
+// Efeito de ripple nos botões (otimizado para mobile)
+function initRippleEffect() {
+    document.querySelectorAll('.cta-button, .proposal-link').forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Verificar se é dispositivo touch
+            if (!document.body.classList.contains('touch-device')) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
+        });
+    });
+    
+    // Adicionar estilo da animação ripple
+    if (!document.getElementById('ripple-style')) {
+        const rippleStyle = document.createElement('style');
+        rippleStyle.id = 'ripple-style';
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+    }
+}
+
+// Função para redimensionar imagens automaticamente
+function initImageOptimization() {
+    const images = document.querySelectorAll('img');
+    
+    images.forEach(img => {
+        img.addEventListener('load', function() {
+            // Adicionar classe para imagens carregadas
+            this.classList.add('loaded');
+        });
         
-        updateCounter();
+        img.addEventListener('error', function() {
+            // Fallback para imagens que falharam ao carregar
+            this.style.display = 'none';
+            console.warn('Falha ao carregar imagem:', this.src);
+        });
     });
 }
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar todas as funcionalidades
     initScrollAnimations();
     initHeaderScroll();
+    initMobileMenu();
     initBackToTop();
     initSmoothScroll();
     initImageModal();
-    initTypingEffect();
-    initParallax();
+    initTouchDetection();
+    initScrollOptimization();
+    initLazyLoading();
+    initViewportFix();
+    initIOSInputFix();
+    initRippleEffect();
+    initImageOptimization();
     
     // Adicionar classes de animação aos elementos
     document.querySelectorAll('.section-card').forEach((card, index) => {
@@ -203,49 +364,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Adicionar efeitos de hover personalizados
-document.addEventListener('DOMContentLoaded', () => {
-    // Efeito de ripple nos botões
-    document.querySelectorAll('.cta-button, .proposal-link').forEach(button => {
-        button.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.cssText = `
-                position: absolute;
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                background: rgba(255, 255, 255, 0.3);
-                border-radius: 50%;
-                transform: scale(0);
-                animation: ripple 0.6s ease-out;
-                pointer-events: none;
-            `;
-            
-            this.style.position = 'relative';
-            this.style.overflow = 'hidden';
-            this.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
-        });
-    });
-    
-    // Adicionar estilo da animação ripple
-    const rippleStyle = document.createElement('style');
-    rippleStyle.textContent = `
-        @keyframes ripple {
-            to {
-                transform: scale(2);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(rippleStyle);
+// Otimizações para performance
+window.addEventListener('load', () => {
+    // Remover animações desnecessárias após carregamento
+    setTimeout(() => {
+        document.body.classList.add('loaded');
+    }, 1000);
 });
+
+// Tratamento de erros global
+window.addEventListener('error', (e) => {
+    console.warn('Erro capturado:', e.error);
+});
+
+// Service Worker para cache (opcional)
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        // Registrar service worker se disponível
+        // navigator.serviceWorker.register('/sw.js');
+    });
+}
+
