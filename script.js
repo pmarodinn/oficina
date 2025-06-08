@@ -13,7 +13,6 @@ function initScrollAnimations() {
         });
     }, observerOptions);
 
-    // Observar elementos com animação
     document.querySelectorAll('.animate-on-scroll').forEach(el => {
         observer.observe(el);
     });
@@ -22,7 +21,7 @@ function initScrollAnimations() {
 // Header scroll effect
 function initHeaderScroll() {
     const header = document.querySelector('header');
-    
+    if (!header) return;
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             header.classList.add('scrolled');
@@ -35,48 +34,51 @@ function initHeaderScroll() {
 // Menu hambúrguer para mobile
 function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    const menuLinks = document.querySelectorAll('.menu a');
-    
-    if (!menuToggle || !menu) return; // Garante que os elementos existem
+    const menu = document.querySelector('header nav ul.menu'); // Seletor mais específico
+    const menuBackdrop = document.querySelector('.menu-backdrop');
 
-    // Toggle do menu
+    if (!menuToggle || !menu || !menuBackdrop) {
+        console.error('Elementos do menu não encontrados. Verifique os seletores.');
+        return;
+    }
+
     menuToggle.addEventListener('click', () => {
+        const isActive = menu.classList.toggle('active');
         menuToggle.classList.toggle('active');
-        menu.classList.toggle('active');
-        
-        // Atualizar aria-label
-        const isOpen = menu.classList.contains('active');
-        menuToggle.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
-        
-        // Prevenir scroll do body quando menu estiver aberto
-        document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+        menuBackdrop.classList.toggle('active');
+        document.body.classList.toggle('menu-open', isActive);
+        menuToggle.setAttribute('aria-expanded', isActive.toString());
+        menuToggle.setAttribute('aria-label', isActive ? 'Fechar menu' : 'Abrir menu');
     });
-    
-    // Fechar menu ao clicar em um link
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            menuToggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = 'auto';
+
+    const closeMenu = () => {
+        menu.classList.remove('active');
+        menuToggle.classList.remove('active');
+        menuBackdrop.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Abrir menu');
+    };
+
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Se for um link interno para âncora, permitir o smooth scroll
+            if (link.getAttribute('href').startsWith('#')) {
+                // Não fechar o menu imediatamente para o smooth scroll funcionar
+                // O smooth scroll já tem seu próprio handler
+            } else {
+                 // Para links externos ou outras páginas, fechar o menu
+                closeMenu();
+            }
+            // Se for um link de âncora na mesma página, o smooth scroll cuidará do fechamento após a rolagem
         });
     });
-    
-    // Fechar menu ao clicar fora dele
-    document.addEventListener('click', (e) => {
-        if (!menuToggle.contains(e.target) && !menu.contains(e.target)) {
-            menuToggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-    });
-    
-    // Fechar menu com ESC
+
+    menuBackdrop.addEventListener('click', closeMenu);
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && menu.classList.contains('active')) {
-            menuToggle.classList.remove('active');
-            menu.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            closeMenu();
         }
     });
 }
@@ -84,45 +86,55 @@ function initMobileMenu() {
 // Botão voltar ao topo
 function initBackToTop() {
     const backToTopBtn = document.querySelector('.back-to-top');
-    
-    if (backToTopBtn) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopBtn.classList.add('visible');
-            } else {
-                backToTopBtn.classList.remove('visible');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    }
+    if (!backToTopBtn) return;
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+    backToTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 }
 
-// Smooth scroll para links internos
+// Smooth scroll para links internos (incluindo os do menu)
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                // Calcular offset do header fixo
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-                
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const menu = document.querySelector('header nav ul.menu'); // Referência ao menu
+
+            if (targetElement) {
+                const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
+
+                // Fechar o menu APÓS o clique e início do scroll, se estiver aberto
+                if (menu && menu.classList.contains('active')) {
+                    // Adiciona um pequeno delay para garantir que o scroll iniciou
+                    setTimeout(() => {
+                        menu.classList.remove('active');
+                        document.querySelector('.menu-toggle')?.classList.remove('active');
+                        document.querySelector('.menu-backdrop')?.classList.remove('active');
+                        document.body.classList.remove('menu-open');
+                        document.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false');
+                        document.querySelector('.menu-toggle')?.setAttribute('aria-label', 'Abrir menu');
+                    }, 150); // Delay de 150ms pode ser ajustado
+                }
             }
         });
     });
 }
+
 
 // Modal para expansão de imagens
 function initImageModal() {
@@ -130,12 +142,10 @@ function initImageModal() {
     const modalImage = document.getElementById('modalImage');
     const modalCaption = document.querySelector('.modal-caption');
     const closeBtn = document.querySelector('.modal-close');
-    
-    if (!modal) return;
-    
-    // Selecionar todas as imagens que devem ser expandidas
+
+    if (!modal || !modalImage || !modalCaption || !closeBtn) return;
+
     const clickableImages = document.querySelectorAll('.cronograma-image, .image-gallery img, .team-member img');
-    
     clickableImages.forEach(img => {
         img.addEventListener('click', () => {
             modal.classList.add('show');
@@ -145,8 +155,7 @@ function initImageModal() {
             document.body.style.overflow = 'hidden';
         });
     });
-    
-    // Fechar modal
+
     const closeModal = () => {
         modal.classList.remove('show');
         document.body.style.overflow = 'auto';
@@ -155,22 +164,13 @@ function initImageModal() {
             modalCaption.textContent = '';
         }, 300);
     };
-    
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-    }
-    
+
+    closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            closeModal();
-        }
+        if (e.target === modal) closeModal();
     });
-    
-    // Fechar com ESC
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) {
-            closeModal();
-        }
+        if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
     });
 }
 
@@ -184,23 +184,19 @@ function initTouchDetection() {
 // Otimização de performance para scroll
 function initScrollOptimization() {
     let ticking = false;
-    
     function updateScrollEffects() {
-        // Aqui você pode adicionar efeitos de scroll otimizados
         ticking = false;
     }
-    
     function requestScrollUpdate() {
         if (!ticking) {
             requestAnimationFrame(updateScrollEffects);
             ticking = true;
         }
     }
-    
     window.addEventListener('scroll', requestScrollUpdate, { passive: true });
 }
 
-// Lazy loading para imagens (se necessário)
+// Lazy loading para imagens
 function initLazyLoading() {
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
@@ -215,10 +211,7 @@ function initLazyLoading() {
                 }
             });
         });
-        
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
+        document.querySelectorAll('img[data-src]').forEach(img => imageObserver.observe(img));
     }
 }
 
@@ -228,19 +221,15 @@ function initViewportFix() {
         const vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);
     }
-    
     setVH();
     window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', () => {
-        setTimeout(setVH, 100);
-    });
+    window.addEventListener('orientationchange', () => setTimeout(setVH, 100));
 }
 
 // Prevenção de zoom em inputs no iOS
 function initIOSInputFix() {
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
-        const inputs = document.querySelectorAll('input, textarea, select');
-        inputs.forEach(input => {
+        document.querySelectorAll('input, textarea, select').forEach(input => {
             if (parseFloat(getComputedStyle(input).fontSize) < 16) {
                 input.style.fontSize = '16px';
             }
@@ -248,82 +237,53 @@ function initIOSInputFix() {
     }
 }
 
-// Efeito de ripple nos botões (otimizado para mobile)
+// Efeito de ripple nos botões
 function initRippleEffect() {
     document.querySelectorAll('.cta-button, .proposal-link').forEach(button => {
         button.addEventListener('click', function(e) {
-            // Verificar se é dispositivo touch
             if (!document.body.classList.contains('touch-device')) {
                 const ripple = document.createElement('span');
                 const rect = this.getBoundingClientRect();
                 const size = Math.max(rect.width, rect.height);
                 const x = e.clientX - rect.left - size / 2;
                 const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
+                ripple.style.cssText = `position: absolute; width: ${size}px; height: ${size}px; left: ${x}px; top: ${y}px; background: rgba(255, 255, 255, 0.3); border-radius: 50%; transform: scale(0); animation: ripple 0.6s ease-out; pointer-events: none;`;
                 this.style.position = 'relative';
                 this.style.overflow = 'hidden';
                 this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
+                setTimeout(() => ripple.remove(), 600);
             }
         });
     });
-    
-    // Adicionar estilo da animação ripple
     if (!document.getElementById('ripple-style')) {
         const rippleStyle = document.createElement('style');
         rippleStyle.id = 'ripple-style';
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
+        rippleStyle.textContent = `@keyframes ripple { to { transform: scale(2); opacity: 0; } }`;
         document.head.appendChild(rippleStyle);
     }
 }
 
 // Função para redimensionar imagens automaticamente
 function initImageOptimization() {
-    const images = document.querySelectorAll('img');
-    
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            // Adicionar classe para imagens carregadas
-            this.classList.add('loaded');
-        });
-        
-        img.addEventListener('error', function() {
-            // Fallback para imagens que falharam ao carregar
-            this.style.display = 'none';
-            console.warn('Falha ao carregar imagem:', this.src);
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('load', () => img.classList.add('loaded'));
+        img.addEventListener('error', () => {
+            img.style.display = 'none';
+            console.warn('Falha ao carregar imagem:', img.src);
         });
     });
 }
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar todas as funcionalidades
+    // Adicionar o backdrop do menu ao body
+    const menuBackdrop = document.createElement('div');
+    menuBackdrop.classList.add('menu-backdrop');
+    document.body.appendChild(menuBackdrop);
+
     initScrollAnimations();
     initHeaderScroll();
-    initMobileMenu();
+    initMobileMenu(); // Deve ser chamado após a criação do backdrop
     initBackToTop();
     initSmoothScroll();
     initImageModal();
@@ -334,42 +294,25 @@ document.addEventListener('DOMContentLoaded', () => {
     initIOSInputFix();
     initRippleEffect();
     initImageOptimization();
-    
-    // Adicionar classes de animação aos elementos
-    document.querySelectorAll('.section-card').forEach((card, index) => {
-        card.classList.add('animate-on-scroll');
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    document.querySelectorAll('.team-member').forEach((member, index) => {
-        member.classList.add('animate-on-scroll');
-        member.style.animationDelay = `${index * 0.1}s`;
-    });
-    
-    document.querySelectorAll('.post').forEach((post, index) => {
-        post.classList.add('animate-on-scroll');
-        post.style.animationDelay = `${index * 0.1}s`;
+
+    document.querySelectorAll('.section-card, .team-member, .post').forEach((el, index) => {
+        el.classList.add('animate-on-scroll');
+        el.style.animationDelay = `${index * 0.1}s`;
     });
 });
 
-// Otimizações para performance
 window.addEventListener('load', () => {
-    // Remover animações desnecessárias após carregamento
-    setTimeout(() => {
-        document.body.classList.add('loaded');
-    }, 1000);
+    setTimeout(() => document.body.classList.add('loaded'), 1000);
 });
 
-// Tratamento de erros global
 window.addEventListener('error', (e) => {
     console.warn('Erro capturado:', e.error);
 });
 
-// Service Worker para cache (opcional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        // Registrar service worker se disponível
-        // navigator.serviceWorker.register('/sw.js');
-    });
-}
+// if ('serviceWorker' in navigator) {
+//     window.addEventListener('load', () => {
+//         // navigator.serviceWorker.register('/sw.js');
+//     });
+// }
+
 
