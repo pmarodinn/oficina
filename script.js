@@ -38,20 +38,8 @@ function initMobileMenu() {
     const menu = document.querySelector('.menu');
     const menuLinks = document.querySelectorAll('.menu a');
     
-    if (!menuToggle) {
-        // Criar botão hambúrguer se não existir
-        const toggle = document.createElement('button');
-        toggle.className = 'menu-toggle';
-        toggle.innerHTML = '<span></span><span></span><span></span>';
-        toggle.setAttribute('aria-label', 'Abrir menu');
-        
-        const nav = document.querySelector('header nav');
-        nav.insertBefore(toggle, menu);
-        
-        // Atualizar referência
-        menuToggle = toggle;
-    }
-    
+    if (!menuToggle || !menu) return; // Garante que os elementos existem
+
     // Toggle do menu
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');

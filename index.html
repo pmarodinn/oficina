@@ -14,6 +14,11 @@
     <header>
         <nav>
             <div class="logo">SignSpeak</div>
+            <button class="menu-toggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="#equipe">Equipe</a></li>
@@ -111,7 +116,6 @@
                 <h2>Integração</h2>
                 <p>O projeto SignSpeak envolve a integração de diversos componentes de hardware e software, unindo áreas como eletrônica, inteligência artificial e processamento de imagem em um único sistema vestível. Do ponto de vista eletrônico, o sistema será construído em torno de um Raspberry Pi 4, responsável por controlar a câmera embutida nos óculos, realizar o processamento dos gestos e reproduzir o áudio resultante.</p>
                 <p>A câmera capta imagens dos gestos feitos com as mãos, que são então processadas localmente por uma CNN previamente treinada para reconhecer o alfabeto manual da LIBRAS. Após o reconhecimento do gesto, o Raspberry Pi converte a letra identificada em áudio por meio de uma biblioteca de texto-para-fala offline. Esse áudio é reproduzido por um pequeno alto-falante embutido nos óculos, permitindo a comunicação de forma discreta e eficiente.</p>
-                <p>A integração eficiente entre hardware e software garante que todas as etapas – captura, processamento e síntese de fala – ocorram de maneira contínua e em tempo real, sem a necessidade de conexão com a internet. Essa abordagem modular também permite futuras expansões do sistema, como o reconhecimento de frases completas ou respostas por voz.</p>
             </div>
         </section>
 
