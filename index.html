@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignSpeak - Óculos Tradutor de Libras</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Barra de Navegação -->
     <header>
         <nav>
+            <div class="logo">SignSpeak</div>
             <ul class="menu">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="#equipe">Equipe</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
         </nav>
@@ -21,89 +26,153 @@
     <section class="hero">
         <div class="hero-content">
             <h1>SignSpeak – Óculos tradutor de libras em áudio</h1>
-            <p>Explore as diferentes etapas do desenvolvimento do nosso projeto e acompanhe nosso progresso.</p>
+            <p>Explore as diferentes etapas do desenvolvimento do nosso projeto e acompanhe nosso progresso na criação de uma tecnologia assistiva inovadora.</p>
+            <a href="#problema" class="cta-button">Conheça o Projeto</a>
         </div>
     </section>
 
     <!-- Seções Principais -->
     <main>
         <section id="problema" class="section">
-            <h2>Problema</h2>
-            <p>A comunicação entre pessoas surdas e ouvintes ainda representa um grande desafio,
-                especialmente em situações cotidianas nas quais não há a presença de intérpretes de LIBRAS
-                (Língua Brasileira de Sinais). Essa limitação compromete a inclusão social e restringe a autonomia
-                das pessoas surdas em contextos como atendimentos médicos, repartições públicas, ambientes
-                educacionais e interações sociais em geral.</p>
+            <div class="section-card animate-on-scroll">
+                <h2>Problema</h2>
+                <p>A comunicação entre pessoas surdas e ouvintes ainda representa um grande desafio,
+                    especialmente em situações cotidianas nas quais não há a presença de intérpretes de LIBRAS
+                    (Língua Brasileira de Sinais). Essa limitação compromete a inclusão social e restringe a autonomia
+                    das pessoas surdas em contextos como atendimentos médicos, repartições públicas, ambientes
+                    educacionais e interações sociais em geral.</p>
+            </div>
         </section>
 
         <section id="solucao" class="section">
-            <h2>Solução Proposta</h2>
-            <p>Considerando essa realidade, este projeto propõe o desenvolvimento do SignSpeak, um
-                sistema portátil de tradução automática de gestos do alfabeto manual de LIBRAS para áudio
-                em português falado. A solução será implementada em um protótipo de óculos inteligente com
-                câmera embutida, capaz de capturar os gestos realizados pelo usuário.</p>
-            <p>O reconhecimento dos sinais será feito por meio de Redes Neurais Convolucionais (CNNs),
-                que identificarão em tempo real as letras representadas. Após o reconhecimento, o sistema
-                converterá o gesto identificado em áudio, utilizando uma biblioteca de texto-para-fala (TTS),
-                sem a necessidade de conexão com a internet.</p>
-            <p>O SignSpeak integra técnicas de visão computacional, inteligência artificial e sistemas
-                embarcados, oferecendo uma alternativa prática, acessível e discreta para melhorar a comunicação
-                entre pessoas surdas e ouvintes. A proposta visa não apenas facilitar o diálogo em tempo real,
-                mas também contribuir para a inclusão digital e social, promovendo maior independência e
-                participação dos surdos na sociedade.</p>
+            <div class="section-card animate-on-scroll">
+                <h2>Solução Proposta</h2>
+                <p>Considerando essa realidade, este projeto propõe o desenvolvimento do SignSpeak, um
+                    sistema portátil de tradução automática de gestos do alfabeto manual de LIBRAS para áudio
+                    em português falado. A solução será implementada em um protótipo de óculos inteligente com
+                    câmera embutida, capaz de capturar os gestos realizados pelo usuário.</p>
+                <p>O reconhecimento dos sinais será feito por meio de Redes Neurais Convolucionais (CNNs),
+                    que identificarão em tempo real as letras representadas. Após o reconhecimento, o sistema
+                    converterá o gesto identificado em áudio, utilizando uma biblioteca de texto-para-fala (TTS),
+                    sem a necessidade de conexão com a internet.</p>
+                <p>O SignSpeak integra técnicas de visão computacional, inteligência artificial e sistemas
+                    embarcados, oferecendo uma alternativa prática, acessível e discreta para melhorar a comunicação
+                    entre pessoas surdas e ouvintes. A proposta visa não apenas facilitar o diálogo em tempo real,
+                    mas também contribuir para a inclusão digital e social, promovendo maior independência e
+                    participação dos surdos na sociedade.</p>
+            </div>
         </section>
 
         <!-- Nova Seção: Proposta -->
         <section id="proposta" class="section">
-            <h2>Proposta</h2>
-            <p>Acesse o arquivo PDF com a proposta detalhada do projeto:</p>
-            <a href="docs/proposta.pdf" target="_blank" class="proposal-link">Clique aqui para baixar a proposta</a>
+            <div class="section-card animate-on-scroll">
+                <h2>Proposta</h2>
+                <p>Acesse o arquivo PDF com a proposta detalhada do projeto:</p>
+                <a href="docs/proposta.pdf" target="_blank" class="proposal-link">Baixar Proposta Completa</a>
+            </div>
         </section>
 
         <section id="cronograma" class="section">
-            <h2>Cronograma</h2>
-            <p>Abaixo está o cronograma detalhado do projeto:</p>
-            <img src="images/cronograma.png" alt="Cronograma do Projeto SignSpeak" class="cronograma-image">
+            <div class="section-card animate-on-scroll">
+                <h2>Cronograma</h2>
+                <p>Abaixo está o cronograma detalhado do projeto:</p>
+                <img src="images/cronograma.png" alt="Cronograma do Projeto SignSpeak" class="cronograma-image">
+            </div>
         </section>
 
         <section id="hardware" class="section">
-            <h2>Hardware/Mecânica</h2>
-            <p>O protótipo será desenvolvido com componentes de baixo consumo energético e compatíveis com sistemas embarcados, visando portabilidade e integração eficiente. A lista de hardware inclui:</p>
-            <ul>
-                <li><strong>Raspberry Pi 4:</strong> Microcomputador que atuará como a unidade central de processamento, responsável pela execução da CNN, controle de periféricos e síntese de áudio.</li>
-                <li><strong>Câmera compatível com Raspberry Pi:</strong> Utilizada para capturar, em tempo real, imagens dos gestos realizados em frente aos óculos.</li>
-                <li><strong>Alto-falante mini embutido:</strong> Componente responsável pela saída de áudio, onde será reproduzida a tradução do gesto reconhecido.</li>
-                <li><strong>Bateria portátil (powerbank):</strong> Fonte de alimentação do sistema, permitindo o funcionamento do dispositivo de maneira autônoma e móvel.</li>
-            </ul>
+            <div class="section-card animate-on-scroll">
+                <h2>Hardware/Mecânica</h2>
+                <p>O protótipo será desenvolvido com componentes de baixo consumo energético e compatíveis com sistemas embarcados, visando portabilidade e integração eficiente. A lista de hardware inclui:</p>
+                <ul>
+                    <li><strong>Raspberry Pi 4:</strong> Microcomputador que atuará como a unidade central de processamento, responsável pela execução da CNN, controle de periféricos e síntese de áudio.</li>
+                    <li><strong>Câmera compatível com Raspberry Pi:</strong> Utilizada para capturar, em tempo real, imagens dos gestos realizados em frente aos óculos.</li>
+                    <li><strong>Alto-falante mini embutido:</strong> Componente responsável pela saída de áudio, onde será reproduzida a tradução do gesto reconhecido.</li>
+                    <li><strong>Bateria portátil (powerbank):</strong> Fonte de alimentação do sistema, permitindo o funcionamento do dispositivo de maneira autônoma e móvel.</li>
+                </ul>
+            </div>
         </section>
 
         <section id="software" class="section">
-            <h2>Software</h2>
-            <p>O sistema embarcado será programado utilizando linguagens e bibliotecas amplamente aplicadas em visão computacional e inteligência artificial. Os principais softwares e ferramentas utilizados são:</p>
-            <ul>
-                <li><strong>Python:</strong> Linguagem de programação principal, escolhida por sua sintaxe clara e ampla compatibilidade com bibliotecas de visão computacional e redes neurais.</li>
-                <li><strong>OpenCV:</strong> Biblioteca utilizada para captura e pré-processamento das imagens obtidas pela câmera, como redimensionamento, normalização e realce de contraste.</li>
-                <li><strong>TensorFlow/Keras:</strong> Frameworks de aprendizado profundo utilizados para o treinamento, validação e embarque do modelo de CNN.</li>
-                <li><strong>pyttsx3 ou espeak:</strong> Bibliotecas de TTS (Texto-para-Fala) que operam de forma offline, responsáveis por converter a saída do modelo em áudio compreensível.</li>
-            </ul>
+            <div class="section-card animate-on-scroll">
+                <h2>Software</h2>
+                <p>O sistema embarcado será programado utilizando linguagens e bibliotecas amplamente aplicadas em visão computacional e inteligência artificial. Os principais softwares e ferramentas utilizados são:</p>
+                <ul>
+                    <li><strong>Python:</strong> Linguagem de programação principal, escolhida por sua sintaxe clara e ampla compatibilidade com bibliotecas de visão computacional e redes neurais.</li>
+                    <li><strong>OpenCV:</strong> Biblioteca utilizada para captura e pré-processamento das imagens obtidas pela câmera, como redimensionamento, normalização e realce de contraste.</li>
+                    <li><strong>TensorFlow/Keras:</strong> Frameworks de aprendizado profundo utilizados para o treinamento, validação e embarque do modelo de CNN.</li>
+                    <li><strong>pyttsx3 ou espeak:</strong> Bibliotecas de TTS (Texto-para-Fala) que operam de forma offline, responsáveis por converter a saída do modelo em áudio compreensível.</li>
+                </ul>
+            </div>
         </section>
 
         <section id="integracao" class="section">
-            <h2>Integração</h2>
-            <p>O projeto SignSpeak envolve a integração de diversos componentes de hardware e software, unindo áreas como eletrônica, inteligência artificial e processamento de imagem em um único sistema vestível. Do ponto de vista eletrônico, o sistema será construído em torno de um Raspberry Pi 4, responsável por controlar a câmera embutida nos óculos, realizar o processamento dos gestos e reproduzir o áudio resultante.</p>
-            <p>A câmera capta imagens dos gestos feitos com as mãos, que são então processadas localmente por uma CNN previamente treinada para reconhecer o alfabeto manual da LIBRAS. Após o reconhecimento do gesto, o Raspberry Pi converte a letra identificada em áudio por meio de uma biblioteca de texto-para-fala offline. Esse áudio é reproduzido por um pequeno alto-falante embutido nos óculos, permitindo a comunicação de forma discreta e eficiente.</p>
-            <p>A integração eficiente entre hardware e software garante que todas as etapas – captura, processamento e síntese de fala – ocorram de maneira contínua e em tempo real, sem a necessidade de conexão com a internet. Essa abordagem modular também permite futuras expansões do sistema, como o reconhecimento de frases completas ou respostas por voz.</p>
+            <div class="section-card animate-on-scroll">
+                <h2>Integração</h2>
+                <p>O projeto SignSpeak envolve a integração de diversos componentes de hardware e software, unindo áreas como eletrônica, inteligência artificial e processamento de imagem em um único sistema vestível. Do ponto de vista eletrônico, o sistema será construído em torno de um Raspberry Pi 4, responsável por controlar a câmera embutida nos óculos, realizar o processamento dos gestos e reproduzir o áudio resultante.</p>
+                <p>A câmera capta imagens dos gestos feitos com as mãos, que são então processadas localmente por uma CNN previamente treinada para reconhecer o alfabeto manual da LIBRAS. Após o reconhecimento do gesto, o Raspberry Pi converte a letra identificada em áudio por meio de uma biblioteca de texto-para-fala offline. Esse áudio é reproduzido por um pequeno alto-falante embutido nos óculos, permitindo a comunicação de forma discreta e eficiente.</p>
+                <p>A integração eficiente entre hardware e software garante que todas as etapas – captura, processamento e síntese de fala – ocorram de maneira contínua e em tempo real, sem a necessidade de conexão com a internet. Essa abordagem modular também permite futuras expansões do sistema, como o reconhecimento de frases completas ou respostas por voz.</p>
+            </div>
+        </section>
+
+        <!-- Nova Seção: Equipe -->
+        <section id="equipe" class="section">
+            <div class="team-section animate-on-scroll">
+                <h2>Nossa Equipe</h2>
+                <p>Conheça os estudantes de engenharia eletrônica dedicados que estão desenvolvendo o projeto SignSpeak, combinando expertise em diferentes áreas para criar uma solução inovadora de tecnologia assistiva.</p>
+                
+                <div class="team-grid">
+                    <div class="team-member animate-on-scroll">
+                        <img src="images/team/joao_victor.jpg" alt="João Victor C. F. da Motta">
+                        <h3>João Victor C. F. da Motta</h3>
+                        <div class="role">Desenvolvedor</div>
+                        <div class="specialty">Estudante de Engenharia Eletrônica</div>
+                    </div>
+                    
+                    <div class="team-member animate-on-scroll">
+                        <img src="images/team/pedro_marodin.jpg" alt="Pedro S. Marodin">
+                        <h3>Pedro S. Marodin</h3>
+                        <div class="role">Desenvolvedor</div>
+                        <div class="specialty">Estudante de Engenharia Eletrônica</div>
+                    </div>
+                    
+                    <div class="team-member animate-on-scroll">
+                        <img src="images/team/rafael_souza.jpg" alt="Rafael M. de Souza">
+                        <h3>Rafael M. de Souza</h3>
+                        <div class="role">Desenvolvedor</div>
+                        <div class="specialty">Estudante de Engenharia Eletrônica</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="relatorio" class="section">
-            <h2>Relatório</h2>
-            <p>Link do relatório</p>
+            <div class="section-card animate-on-scroll">
+                <h2>Relatório</h2>
+                <p>O relatório final do projeto estará disponível em breve, documentando todo o processo de desenvolvimento, resultados obtidos e conclusões.</p>
+                <a href="#" class="proposal-link" style="opacity: 0.6; pointer-events: none;">Relatório em Desenvolvimento</a>
+            </div>
         </section>
     </main>
 
+    <!-- Botão voltar ao topo -->
+    <a href="#" class="back-to-top">↑</a>
+
+    <!-- Modal para expansão de imagens -->
+    <div id="imageModal" class="image-modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modalImage" src="" alt="">
+            <div class="modal-caption"></div>
+        </div>
+    </div>
+
     <!-- Rodapé -->
     <footer>
-        <p>&copy; 2025 - Todos os direitos reservados</p>
+        <p>&copy; 2025 SignSpeak - Todos os direitos reservados | Projeto de Tecnologia Assistiva</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
