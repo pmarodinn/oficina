@@ -1,221 +1,166 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - SignSpeak</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <!-- Barra de Navegação -->
-    <header>
-        <nav>
-            <div class="logo">SignSpeak</div>
-            <ul class="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#equipe">Equipe</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- Seção de Introdução -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Blog do Projeto SignSpeak</h1>
+        <p>Acompanhe nossas atualizações diárias e veja o progresso do desenvolvimento do nosso projeto de tecnologia assistiva.</p>
+        <a href="#posts" class="cta-button">Ver Posts</a>
+    </div>
+</section>
 
-    <!-- Seção de Introdução -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Blog do Projeto SignSpeak</h1>
-            <p>Acompanhe nossas atualizações diárias e veja o progresso do desenvolvimento do nosso projeto de tecnologia assistiva.</p>
-            <a href="#posts" class="cta-button">Ver Posts</a>
+<!-- Navegação entre as categorias (opcional) -->
+<div class="category-nav">
+    <a href="#introducao">Introdução</a>
+    <a href="#informacoes-gerais">Informações Gerais</a>
+    <a href="#hardware-mecanica">Hardware e Mecânica</a>
+    <a href="#software">Software</a>
+</div>
+
+<!-- Posts do Blog -->
+<main>
+    <section id="posts" class="blog-posts">
+        <!-- Categoria: Introdução -->
+        <h2 id="introducao">Introdução</h2>
+        <div class="posts-grid">
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>10 de Abril de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Marco Inicial:</strong> Hoje finalizamos a proposta e iniciamos oficialmente o blog do projeto. Este é o primeiro passo de uma jornada que promete revolucionar a comunicação entre pessoas surdas e ouvintes através da tecnologia.</p>
+                    <div class="post-tags">
+                        <span class="tag">Início</span>
+                        <span class="tag">Proposta</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Categoria: Informações Gerais -->
+        <h2 id="informacoes-gerais">Informações Gerais</h2>
+        <div class="posts-grid">
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>17 de Abril de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Seleção de Componentes:</strong> Fizemos a idealização inicial do projeto e selecionamos cuidadosamente os componentes que serão utilizados. Cada peça foi escolhida pensando na eficiência energética e na portabilidade do dispositivo final.</p>
+                    <div class="image-gallery">
+                        <img src="images/img1_comp.jpg" alt="Componente 1 - Raspberry Pi 4">
+                        <img src="images/img2_comp.jpg" alt="Componente 2 - Câmera">
+                        <img src="images/img3_comp.jpg" alt="Componente 3 - Alto-falante">
+                        <img src="images/img4_comp.jpg" alt="Componente 4 - Bateria">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Hardware</span>
+                        <span class="tag">Componentes</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Categoria: Hardware e Mecânica -->
+        <h2 id="hardware-mecanica">Hardware e Mecânica</h2>
+        <div class="posts-grid">
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>25 de Abril de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Design da Armação:</strong> Desenvolvemos o design da armação dos óculos e definimos a disposição estratégica dos componentes. O foco foi criar um design ergonômico que seja confortável para uso prolongado e discreto o suficiente para o dia a dia.</p>
+                    <div class="image-gallery">
+                        <img src="images/img1_mont.jpg" alt="Design inicial da armação">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Design</span>
+                        <span class="tag">Ergonomia</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>16 de Maio de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Primeira Montagem:</strong> Realizamos a conexão dos dispositivos e os primeiros ajustes físicos. Este foi um momento crucial onde pudemos ver o projeto tomando forma física pela primeira vez.</p>
+                    <div class="image-gallery">
+                        <img src="images/img2_mont.jpg" alt="Primeira montagem dos componentes">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Montagem</span>
+                        <span class="tag">Prototipagem</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>23 de Maio de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Testes de Usabilidade:</strong> Conduzimos os primeiros testes finais do protótipo vestível. Os resultados foram promissores, mostrando que o dispositivo é confortável e funcional para uso real.</p>
+                    <div class="image-gallery">
+                        <img src="images/img1_mont.jpg" alt="Teste de usabilidade 1">
+                        <img src="images/img2_mont.jpg" alt="Teste de usabilidade 2">
+                        <img src="images/img3_mont.jpg" alt="Teste de usabilidade 3">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Testes</span>
+                        <span class="tag">Usabilidade</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>06 de Junho de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Hardware Finalizado:</strong> Concluímos a finalização da montagem do hardware e da estrutura mecânica. O protótipo agora está pronto para a fase de desenvolvimento de software.</p>
+                    <div class="post-tags">
+                        <span class="tag">Hardware</span>
+                        <span class="tag">Finalização</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Categoria: Software -->
+        <h2 id="software">Software</h2>
+        <div class="posts-grid">
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>20 de Abril de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Coleta de Dataset:</strong> Iniciamos a coleta de um conjunto abrangente de imagens representando cada letra do alfabeto de Libras. Essas imagens serão fundamentais para treinar nosso modelo de ML. Estamos trabalhando para garantir uma amostragem equilibrada e diversificada, considerando diferentes ângulos, iluminações e variações de gestos.</p>
+                    <div class="image-gallery">
+                        <img src="images/img1_libras.png" alt="Alfabeto de Libras para treinamento">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Dataset</span>
+                        <span class="tag">Libras</span>
+                        <span class="tag">Treinamento</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post animate-on-scroll">
+                <div class="post-header">
+                    <h2>13 de Maio de 2025</h2>
+                </div>
+                <div class="post-content">
+                    <p><strong>Desenvolvimento de Software:</strong> Iniciamos o desenvolvimento do software com foco em algoritmos de Machine Learning. Estudamos diferentes abordagens, com ênfase especial em redes neurais convolucionais (CNN), ideais para reconhecimento de padrões em imagens. A CNN será fundamental para detectar e classificar gestos das letras do alfabeto de Libras.</p>
+                    <div class="image-gallery">
+                        <img src="images/img1_cnn.jpg" alt="Estudo de algoritmo CNN para reconhecimento de imagens">
+                    </div>
+                    <div class="post-tags">
+                        <span class="tag">Software</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">CNN</span>
+                    </div>
+                </div>
+            </article>
         </div>
     </section>
-
-    <!-- Posts do Blog -->
-    <main>
-        <section id="posts" class="blog-posts">
-            <div class="posts-grid">
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>10 de Abril de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Marco Inicial:</strong> Hoje finalizamos a proposta e iniciamos oficialmente o blog do projeto. Este é o primeiro passo de uma jornada que promete revolucionar a comunicação entre pessoas surdas e ouvintes através da tecnologia.</p>
-                        <div class="post-tags">
-                            <span class="tag">Início</span>
-                            <span class="tag">Proposta</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>17 de Abril de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Seleção de Componentes:</strong> Fizemos a idealização inicial do projeto e selecionamos cuidadosamente os componentes que serão utilizados. Cada peça foi escolhida pensando na eficiência energética e na portabilidade do dispositivo final.</p>
-                        <div class="image-gallery">
-                            <img src="images/img1_comp.jpg" alt="Componente 1 - Raspberry Pi 4">
-                            <img src="images/img2_comp.jpg" alt="Componente 2 - Câmera">
-                            <img src="images/img3_comp.jpg" alt="Componente 3 - Alto-falante">
-                            <img src="images/img4_comp.jpg" alt="Componente 4 - Bateria">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Hardware</span>
-                            <span class="tag">Componentes</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>25 de Abril de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Design da Armação:</strong> Desenvolvemos o design da armação dos óculos e definimos a disposição estratégica dos componentes. O foco foi criar um design ergonômico que seja confortável para uso prolongado e discreto o suficiente para o dia a dia.</p>
-                        <div class="image-gallery">
-                            <img src="images/img1_mont.jpg" alt="Design inicial da armação">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Design</span>
-                            <span class="tag">Ergonomia</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>16 de Maio de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Primeira Montagem:</strong> Realizamos a conexão dos dispositivos e os primeiros ajustes físicos. Este foi um momento crucial onde pudemos ver o projeto tomando forma física pela primeira vez.</p>
-                        <div class="image-gallery">
-                            <img src="images/img2_mont.jpg" alt="Primeira montagem dos componentes">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Montagem</span>
-                            <span class="tag">Prototipagem</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>23 de Maio de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Testes de Usabilidade:</strong> Conduzimos os primeiros testes finais do protótipo vestível. Os resultados foram promissores, mostrando que o dispositivo é confortável e funcional para uso real.</p>
-                        <div class="image-gallery">
-                            <img src="images/img1_mont.jpg" alt="Teste de usabilidade 1">
-                            <img src="images/img2_mont.jpg" alt="Teste de usabilidade 2">
-                            <img src="images/img3_mont.jpg" alt="Teste de usabilidade 3">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Testes</span>
-                            <span class="tag">Usabilidade</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>06 de Junho de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Hardware Finalizado:</strong> Concluímos a finalização da montagem do hardware e da estrutura mecânica. O protótipo agora está pronto para a fase de desenvolvimento de software.</p>
-                        <div class="post-tags">
-                            <span class="tag">Hardware</span>
-                            <span class="tag">Finalização</span>
-                        </div>
-                    </div>
-                </article>
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>20 de Abril de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Coleta de Dataset:</strong> Iniciamos a coleta de um conjunto abrangente de imagens representando cada letra do alfabeto de Libras. Essas imagens serão fundamentais para treinar nosso modelo de ML. Estamos trabalhando para garantir uma amostragem equilibrada e diversificada, considerando diferentes ângulos, iluminações e variações de gestos.</p>
-                        <div class="image-gallery">
-                            <img src="images/img1_libras.png" alt="Alfabeto de Libras para treinamento">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Dataset</span>
-                            <span class="tag">Libras</span>
-                            <span class="tag">Treinamento</span>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="post animate-on-scroll">
-                    <div class="post-header">
-                        <h2>13 de Maio de 2025</h2>
-                    </div>
-                    <div class="post-content">
-                        <p><strong>Desenvolvimento de Software:</strong> Iniciamos o desenvolvimento do software com foco em algoritmos de Machine Learning. Estudamos diferentes abordagens, com ênfase especial em redes neurais convolucionais (CNN), ideais para reconhecimento de padrões em imagens. A CNN será fundamental para detectar e classificar gestos das letras do alfabeto de Libras.</p>
-                        <div class="image-gallery">
-                            <img src="images/img1_cnn.jpg" alt="Estudo de algoritmo CNN para reconhecimento de imagens">
-                        </div>
-                        <div class="post-tags">
-                            <span class="tag">Software</span>
-                            <span class="tag">Machine Learning</span>
-                            <span class="tag">CNN</span>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <!-- Botão voltar ao topo -->
-    <a href="#" class="back-to-top">↑</a>
-
-    <!-- Modal para expansão de imagens -->
-    <div id="imageModal" class="image-modal">
-        <div class="modal-content">
-            <span class="modal-close">&times;</span>
-            <img id="modalImage" src="" alt="">
-            <div class="modal-caption"></div>
-        </div>
-    </div>
-
-    <!-- Rodapé -->
-    <footer>
-        <p>&copy; 2025 SignSpeak - Todos os direitos reservados | Projeto de Tecnologia Assistiva</p>
-    </footer>
-
-    <script src="script.js"></script>
-    
-    <!-- Script adicional para tags -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Adicionar estilos para as tags
-            const tagStyle = document.createElement('style');
-            tagStyle.textContent = `
-                .post-tags {
-                    margin-top: 1.5rem;
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 0.5rem;
-                }
-                
-                .tag {
-                    background: var(--gradient-accent);
-                    color: white;
-                    padding: 0.3rem 0.8rem;
-                    border-radius: 15px;
-                    font-size: 0.8rem;
-                    font-weight: 500;
-                    transition: all 0.3s ease;
-                }
-                
-                .tag:hover {
-                    transform: translateY(-2px);
-                    box-shadow: var(--shadow-light);
-                }
-            `;
-            document.head.appendChild(tagStyle);
-        });
-    </script>
-</body>
-</html>
-
+</main>
