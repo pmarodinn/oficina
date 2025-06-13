@@ -34,7 +34,7 @@ function initHeaderScroll() {
 // Menu hambúrguer para mobile
 function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('header nav ul.menu'); // Seletor mais específico
+    const menu = document.querySelector('header nav ul.menu');
     const menuBackdrop = document.querySelector('.menu-backdrop');
 
     if (!menuToggle || !menu || !menuBackdrop) {
@@ -62,15 +62,11 @@ function initMobileMenu() {
 
     menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', (e) => {
-            // Se for um link interno para âncora, permitir o smooth scroll
             if (link.getAttribute('href').startsWith('#')) {
                 // Não fechar o menu imediatamente para o smooth scroll funcionar
-                // O smooth scroll já tem seu próprio handler
             } else {
-                 // Para links externos ou outras páginas, fechar o menu
                 closeMenu();
             }
-            // Se for um link de âncora na mesma página, o smooth scroll cuidará do fechamento após a rolagem
         });
     });
 
@@ -100,14 +96,14 @@ function initBackToTop() {
     });
 }
 
-// Smooth scroll para links internos (incluindo os do menu)
+// Smooth scroll para links internos
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            const menu = document.querySelector('header nav ul.menu'); // Referência ao menu
+            const menu = document.querySelector('header nav ul.menu');
 
             if (targetElement) {
                 const headerHeight = document.querySelector('header')?.offsetHeight || 0;
@@ -118,9 +114,7 @@ function initSmoothScroll() {
                     behavior: 'smooth'
                 });
 
-                // Fechar o menu APÓS o clique e início do scroll, se estiver aberto
                 if (menu && menu.classList.contains('active')) {
-                    // Adiciona um pequeno delay para garantir que o scroll iniciou
                     setTimeout(() => {
                         menu.classList.remove('active');
                         document.querySelector('.menu-toggle')?.classList.remove('active');
@@ -128,49 +122,65 @@ function initSmoothScroll() {
                         document.body.classList.remove('menu-open');
                         document.querySelector('.menu-toggle')?.setAttribute('aria-expanded', 'false');
                         document.querySelector('.menu-toggle')?.setAttribute('aria-label', 'Abrir menu');
-                    }, 150); // Delay de 150ms pode ser ajustado
+                    }, 150);
                 }
             }
         });
     });
 }
 
-
-// Modal para expansão de imagens
+// Modal para expansão de imagens - VERSÃO CORRIGIDA
 function initImageModal() {
     const modal = document.getElementById('imageModal');
-    const modalImage = document.getElementById('modalImage');
+    const modalImg = document.getElementById('modalImage');
     const modalCaption = document.querySelector('.modal-caption');
     const closeBtn = document.querySelector('.modal-close');
 
-    if (!modal || !modalImage || !modalCaption || !closeBtn) return;
+    if (!modal || !modalImg || !modalCaption || !closeBtn) return;
 
-    const clickableImages = document.querySelectorAll('.cronograma-image, .image-gallery img, .team-member img');
-    clickableImages.forEach(img => {
-        img.addEventListener('click', () => {
-            modal.classList.add('show');
-            modalImage.src = img.src;
-            modalImage.alt = img.alt;
-            modalCaption.textContent = img.alt || 'Imagem do projeto SignSpeak';
+    // Seleciona todas as imagens clicáveis
+    const images = document.querySelectorAll('.image-gallery img, .cronograma-image, .team-member img');
+    
+    images.forEach(img => {
+        img.addEventListener('click', function() {
+            // Primeiro define a imagem e legenda
+            modalImg.src = this.src;
+            modalImg.alt = this.alt;
+            modalCaption.textContent = this.alt || '';
+            
+            // Depois mostra o modal
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            // Pequeno delay para garantir o render
+            setTimeout(() => {
+                modal.classList.add('show');
+                modalImg.style.opacity = '1';
+            }, 10);
         });
     });
 
+    // Função para fechar o modal
     const closeModal = () => {
         modal.classList.remove('show');
+        modalImg.style.opacity = '0';
         document.body.style.overflow = 'auto';
+        
+        // Espera a animação terminar antes de esconder
         setTimeout(() => {
-            modalImage.src = '';
-            modalCaption.textContent = '';
+            modal.style.display = 'none';
         }, 300);
     };
 
+    // Event listeners para fechar
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
     });
 }
 
@@ -283,10 +293,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initScrollAnimations();
     initHeaderScroll();
-    initMobileMenu(); // Deve ser chamado após a criação do backdrop
+    initMobileMenu();
     initBackToTop();
     initSmoothScroll();
-    initImageModal();
+    initImageModal(); // Função corrigida para o modal de imagens
     initTouchDetection();
     initScrollOptimization();
     initLazyLoading();
@@ -308,11 +318,3 @@ window.addEventListener('load', () => {
 window.addEventListener('error', (e) => {
     console.warn('Erro capturado:', e.error);
 });
-
-// if ('serviceWorker' in navigator) {
-//     window.addEventListener('load', () => {
-//         // navigator.serviceWorker.register('/sw.js');
-//     });
-// }
-
-
