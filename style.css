@@ -654,6 +654,14 @@ main {
     margin-top: 1.5rem;
 }
 
+.gif-image {
+    /* estilos específicos para GIFs */
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
 .image-gallery img {
     width: 100%;
     height: clamp(150px, 25vw, 200px);
